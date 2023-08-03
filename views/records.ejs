@@ -1,0 +1,35 @@
+<%- include('partials/header.ejs'); %>
+<link rel="stylesheet" href="css/records.css">
+<body >
+<%- include('partials/navbar.ejs'); %> 
+
+<div class="records-container mb-3" id="records">
+  <ul class="list-group teste mt-2" style="display: none;" >
+    <% if(users.length > 0) { %>
+        <% users.forEach((user, index) => { %>
+          <li class="list-group-item position<%=index+1%> leaderboard searchItem py-0" style="display: flex; align-items: center;">
+            <h3 style="margin-right: 1.5rem;"><%=index+1%>°</h3>
+            <img src="/api/user/profilepic/<%=user.id%>" alt="Avatar" class="suggestionProfilePic" />
+            <div class="d-flex flex-column" style="overflow-x: auto;">
+              <h6 style="font-size: 16px;" class="suggestionText mt-3"><%=user.name%> <%=user.surname%></h6>
+              <p class="text-muted word-wrap-break-word suggestionText" style="margin-top: -0.7rem; font-size: 14px">@<%=user.username%></p>
+            </div>
+            <h2 class="points"><%=user.record%></h2>
+          </li>
+        <% }); %>
+      <% } else { %>
+        <li class="list-group-item searchItem mt-3 py-0" style="display: flex; align-items: center; align-content: center;">
+          <img src=https://memesengracados.net/wp-content/uploads/2020/09/gato-triste-variacao-1.png alt="Avatar" class="suggestionProfilePic" style="width: 20%;" />
+          <div class="d-flex flex-column" style="overflow-x: auto;">
+            <h6 style="font-size: 36px;" class="suggestionText mt-3">Sem usuários cadastrados </h6>
+          </div>
+          <h2 class="points"></h2>
+        </li>
+      <% } %>
+    
+  </ul>
+  </div>
+
+<script src="/js/records.js"></script>
+</body>
+<%- include('partials/footer.ejs'); %>

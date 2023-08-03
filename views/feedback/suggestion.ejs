@@ -1,0 +1,30 @@
+<%- include('../partials/header.ejs'); %>
+<body>
+<%- include('../partials/navbar.ejs'); %> 
+
+<form action="/api/feedback/suggestion" method="post" style="margin-bottom: 50vh;">
+    <div class="d-flex justify-content-center align-items-center mt-5">
+        <div class="card" style="width: 50rem;">
+          <div class="card-header text-center"><h3>Sugestão de filme? <i class="fa-regular fa-lightbulb"></i></h3></div>
+          <div class="card-body">
+            <input type="hidden" name="type" value="1">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Título do filme</label>
+                    <input type="title" class="form-control" name="title" placeholder="Filme" required>
+                </div>
+                <div class="mb-3">
+                    <label for="link" class="form-label">Link do IMDB</label>
+                    <input placeholder="https://www.imdb.com/title/tt0389860/?ref_=nv_sr_srsg_0_tt_7_nm_1_q_Click" name="link" type="text" class="form-control" required>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                    <button type="submit" class="btn btn-success float-end">Enviar</button>
+                    </div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+</body>
+<%- include('../partials/footer.ejs'); %>

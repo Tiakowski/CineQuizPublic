@@ -1,0 +1,36 @@
+<%- include('../partials/header.ejs'); %>
+<body>
+<%- include('../partials/navbar.ejs'); %> 
+
+
+<form action="/api/user/login" method="post" style="margin-bottom: 50vh;">
+    <div class="d-flex justify-content-center align-items-center mt-5">
+        <div class="card" style="width: 50rem;">
+          <div class="card-header text-center"><h3>Login</h3></div>
+          <div class="card-body">
+            <form>
+                <% if (typeof loginErrors !== 'undefined' && loginErrors.system) { %>
+                    <p class="error-message"><%= loginErrors.system %></p>
+                <% } %>
+                
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="email@dominio.com">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Senha</label>
+                    <input type="password" class="form-control" name="password" placeholder="*******">
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                    <button type="submit" class="btn btn-success float-end">Entrar</button>
+                    </div>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </form>
+
+</body>
+<%- include('../partials/footer.ejs'); %>

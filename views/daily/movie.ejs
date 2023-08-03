@@ -1,0 +1,136 @@
+<%- include('../partials/header.ejs'); %>
+<link rel="stylesheet" href="../css/movie.css">
+<body >
+<%- include('../partials/navbar.ejs'); %> 
+
+<div class="counter" id="counter">
+    <h4>Próximo filme em: {{hours}}{{separateHours}}{{minutes}}:{{seconds}}</h4>
+</div>
+
+
+    <div id="dailyMovie"  class="background-quiz border border-secondary">
+        <p class="info" id="info" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Os nomes dos filmes devem ser procurados em seus idiomas originais, exemplo: A Viagem de Chihiro = Sen to Chihiro no Kamikakushi | Ghost in the Shell = Kôkaku Kidôtai">
+            <i class="bi bi-info-circle-fill"></i>
+          </p>
+          
+       <div v-if="showBlackScreen" class="blackScreen" id="blackScreen"></div>   
+    
+        <div class="chances-quiz">
+            <div class="first gray"></div>
+            <div class="second gray"></div>
+            <div class="third gray"></div>
+            <div class="fourth gray"></div>
+            <div class="fifth gray"></div>
+            <div class="sixth gray"></div>
+        </div>
+        
+        
+            <% if (user) { %>
+                <div id="user-data" data-user-id="<%= user.id %>"></div>
+             <% } %>
+             
+             
+             <button id="start" @click="start" v-if="showStartButton" type="button" class="start btn-lg btn btn-info">Começar <i class="fa-solid fa-play"></i></button>
+             <button id="start-mobile" @click="start" v-if="showStartButton" type="button" class="start-mobile btn btn-info">Começar <i class="fa-solid fa-play"></i></button>
+    
+             <button v-if="showTipsButton" @click="openMenu" class="vertical">DICAS</button>
+                <div>
+                    <div id="sidebar" class="sidebar overflow-list"  :class="{'open': isMenuOpen }">
+                        <div @click="closeMenu" class="close-tips">
+                            <h3>Fechar</h3>
+                        </div>
+                        <div class="tips-list">
+                            <div>
+                                <div v-for="tip in tips" :key="tip.theme"> 
+                                  <h4 class="tip-theme">{{ tip.theme }}</h4>
+                                  <p class="tip-tip">{{ tip.tip }}</p>
+                                  <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+    
+    
+    
+        <div v-if="callLost" class="answer">
+            <h1 class="title">{{title}}</h1>
+            <div class="img-container">
+                <img class="img-answer" :src="poster" alt="">
+            </div>
+        </div>
+    
+    
+    <div v-if="!callLost" class="lost">
+    
+        
+        <div class="theme no-pointer-events border border-dark" >
+           
+            <h1>{{ theme }}</h1>
+        </div>
+        <div class="meta" :class="colors">
+            <h1>{{meta}}</h1>
+        </div>
+        
+    
+        <div class="tip border border-dark]">
+            <h2 v-html="tip"></h2>
+        </div>
+        
+    
+        <div class="movie-search" >
+            <div class="input-group disabled">
+                <input class="input-search form-control" :disabled="isDisabledInput" @focus="fetchSuggestions" @input="fetchSuggestionsDebounced" v-model="searchTerm" type="text" placeholder="Procurar filme">
+                <button class="button-search btn btn-success" :disabled="isDisabledInputButton" @click="verify" type="button">Chutar <i class="fa-solid fa-clapperboard"></i></button>
+              </div>
+              
+              <div>
+                <ul class="movies-list  list-group dropdown-menu" style="width: 100%; max-height: 30vh; overflow-y: auto;" v-if="searchTerm && suggestions.length > 0">
+                    <a v-for="suggestion in suggestions" :key="suggestion.id" @click="selectSuggestion(suggestion)" class="text-decoration-none">
+                      <li class="list-group-item" style="display: flex; padding: 10px; margin: 0; align-items: center;">
+                        <p style="margin-bottom: 0;">{{ suggestion.title }}</p>
+                      </li>
+                    </a>
+                  </ul>
+              </div>
+             
+        </div>
+        <div class="next-clue">
+            <button type="button" @click="nextTip" :disabled="isDisabledNextTip" class="btn btn-secondary mr-2">{{buttonTipContent}} <i class="bi bi-lightbulb-fill"></i> </button>
+
+        </div>
+        <div class="points">
+            <h5>Pontuação atual: {{points}}</h5>
+        </div>
+              
+        </div>
+    </div>
+    
+        
+      
+    
+        
+    
+    
+        <!-- <div class="last-tips">
+            <h3>Dicas:</h3>
+        </div> -->
+    </div>
+    <% if (!isAuthenticated){ %>
+        <div class="save-record ">
+            <a href="/user/login">Entre</a> ou <a href="/user/register">registre-se</a> para salvar sua pontuação.
+    
+        </div>
+        <% } %>
+    
+    
+      
+    
+
+
+<script src="../js/daily/counter.js"></script>
+<script src="../js/daily/dailyMovie.js"></script>
+
+</body>
+<%- include('../partials/footer.ejs'); %>

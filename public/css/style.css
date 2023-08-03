@@ -1,0 +1,237 @@
+.error-message {
+    text-align: center;
+    color: #772b35;
+    background-color: #fadddd;
+    border-color: #f8cfcf;
+  }
+
+html{
+  min-height: 100vh;
+}
+
+
+body {
+  background-image: url("/img/moviesaaa.jpg");
+  background-color: #000;
+  background-size: cover; /* Ajusta o tamanho da imagem para cobrir todo o fundo */
+  background-repeat: no-repeat; /* Impede a repetição da imagem */
+  background-attachment: fixed; /* Define a imagem de fundo como fixa */
+  min-height: 100vh;
+  position: relative;
+}
+
+.logo {
+  width: 3rem;
+}
+
+.info{
+  position: absolute;
+  left: 0;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s; 
+}
+
+.info:hover{
+  transform: scale(1.2);
+}
+
+.main-container{
+  min-height: 80vh;
+}
+
+.accordion-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #212529;
+  color: white;
+}
+
+.accordion-button:not(.collapsed)::after {
+  color: white;
+}
+
+/* Estilos para deixar o seletor de recorte arredondado */
+.cropper-view-box,
+.cropper-face {
+  border-radius: 50%;
+}
+
+.profilepic {
+  width: 80px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6); /* Adicione uma sombra (opcional) */
+
+}
+
+
+
+.search {
+  position: relative;
+}
+
+.autocomplete-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+}
+
+.suggestionProfilePic{
+  width: 40px;
+  border-radius: 50%;
+}
+
+.suggestionText {
+  margin-left: 10px;
+}
+
+.autocomplete-suggestions{
+  border-radius: 10%;
+}
+
+
+.changeAvatar, .changeName {
+  color: black;
+  text-decoration: none;
+}
+
+.changeAvatar:hover, .changeName:hover {
+  color: rgb(0, 202, 44);
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+#follow-btn {
+  max-height: 25px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+}
+
+#followingButton, #followersButton {
+  cursor: pointer;
+}
+
+#followingButton:hover, #followersButton:hover {
+  color: #0A58CA;
+}
+
+
+.search{
+  width: 25%;
+  margin-right: 40px;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.footer{
+  bottom: 0;
+}
+
+.footer a {
+  text-decoration:none
+}
+
+.btn:disabled {
+  opacity: 1;
+  
+}
+
+
+.bar{
+  margin: 0 2rem;
+
+}
+
+.problems {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
+.overflow-list::-webkit-scrollbar {
+  width: 8px;               /* width of the entire scrollbar */
+}
+
+.overflow-list::-webkit-scrollbar-track{
+  background: rgb(43, 0, 44);        /* color of the tracking area */
+}
+
+.overflow-list::-webkit-scrollbar-thumb{
+  background-color: rgb(0, 0, 0);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+}
+
+
+
+@media (max-width: 991.98px) {
+
+  #dropdownPerfil {
+    right: auto;
+    left: 0;
+    transform: scale(1.05); /* Crescimento de 5% no tamanho ao passar o mouse */
+  }
+
+  .line {
+    color: #000; /* Cor da linha */
+    border-top: 1px solid #000; /* Espessura e estilo da linha */
+    margin: 10px 0; /* Margem superior e inferior da linha */
+  }
+
+  .rotate {
+    transform: rotate(45deg);
+  }
+
+  .rotate45 {
+    transform: rotate(-45deg);
+  }
+
+  .none {
+    display: none;
+  }
+
+  .line1, .line2, .line3 {
+    width: 32px;
+    height: 2px;
+    background-color: #fff;
+    margin: 8px;
+    transition: 0.3s;
+    
+  }
+
+  .line1Rotate{
+    transform: rotate(-45deg) translate(-8px, 8px);
+  }
+
+  .line2Rotate{
+    opacity: 0;
+  }
+
+  .line3Rotate{
+    transform: rotate(45deg) translate(-5px, -7px);
+  }
+
+  .search{
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+
+  .problems {
+    flex-direction: column; /* Para colocar os itens em coluna em telas menores */
+}
+
+  .bar{
+    display: none;
+  }
+  
+  
+}

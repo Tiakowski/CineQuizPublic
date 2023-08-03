@@ -1,0 +1,50 @@
+ <!-- Modal -->
+  <div class="modal fade" id="modalFollowers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <% if(usersFollowers !== null){ %>
+            <% usersFollowers.forEach(function(user) { %>
+	            <ul class="list-group w-100">
+                <a href='/user/profile/<%= user.username %>'
+                  class="text-decoration-none">
+                  <li class="list-group-item searchItem py-0" style="display: flex; align-items: center;">
+                    <img src="/api/user/profilepic/<%= user.id%>" alt="Avatar" class=" suggestionProfilePic" />
+                    <div class="d-flex flex-column" style="overflow-x: auto;">
+                      <h6 style="font-size: 16px;" class="suggestionText mt-3"><%= user.name %></h6>
+                      <p class="text-muted word-wrap-break-word suggestionText"
+                        style="margin-top: -0.7rem; font-size: 14px">@<%= user.username %></p>
+                    </div>
+                  </li>
+                </a>
+              </ul>
+              <% }); %>
+          <% } else { %>
+            <div class="d-flex align-items-center flex-column" style="height: 100%">
+              <p style="margin-bottom: -0.1rem;" class="mx-auto">Este usuário não possui seguidores.... ainda. <i class="fa-regular fa-face-smile-beam"></i></p>
+              <% if(user.id != userId){ %>
+                <p>Seja o Primeiro a seguir <%= user.name %>!</p>
+                <% if(isAuthenticated){ %>
+                  <button data-username="<%= user.username %>" type="button" class="btn btn-success btn-sm follow-btn">Seguir</button>
+                <% } else { %>
+                  <p><a style="text-decoration: none; color: white;" href="/user/login">
+                    <button href type="button"  class="btn btn-success btn-sm">Entre</button>
+                    </a>
+                     ou  
+                     <a style="text-decoration: none; color: white;" href="/user/register">
+                      <button href type="button"  class="btn btn-success btn-sm">Cadastre-se</button>
+                    </a>
+                <% }; %>
+              <% }; %>
+            </div>
+          <% }; %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>

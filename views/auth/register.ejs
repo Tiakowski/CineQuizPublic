@@ -1,0 +1,86 @@
+<%- include('../partials/header.ejs'); %>
+<body>
+<%- include('../partials/navbar.ejs'); %> 
+
+<form action="/api/user/create" method="post" style="margin-bottom: 50vh;" >
+<div class="d-flex justify-content-center align-items-center mt-5">
+    <div class="card" style="width: 50rem;">
+      <div class="card-header text-center"><h3>Crie sua conta</h3></div>
+      <div class="card-body">
+        <form>
+            <% if (typeof createErrors !== 'undefined' && createErrors.system) { %>
+                <p class="error-message"><%= createErrors.system %></p>
+            <% } %>
+            <div class="row">
+                <div class="col">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Nome</label>
+                    <input type="text" class="form-control" name="name" placeholder="Seu nome">
+                    <% if (typeof createErrors !== 'undefined' && createErrors.name) { %>
+                        <p class="error-message"><%= createErrors.name %></p>
+                    <% } %>
+                </div>
+                </div>
+                <div class="col">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Sobrenome</label>
+                    <input type="text" name="surname" class="form-control" placeholder="Sobrenome">
+                    <% if (typeof createErrors !== 'undefined' && createErrors.surname) { %>
+                        <p class="error-message"><%= createErrors.surname %></p>
+                    <% } %>
+                    <div class="invalid-feedback">
+                      Please choose a username.
+                    </div>
+                </div>
+                </div>
+            </div>
+            <label for="exampleFormControlInput1" class="form-label">Username</label>
+            <div class="input-group">
+                <span class="input-group-text" id="basic-addon1">@</span>
+                <input type="text" class="form-control" name="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <% if (typeof createErrors !== 'undefined' && createErrors.username) { %>
+                <p class="error-message"><%= createErrors.username %></p>
+            <% } %>
+            <div class="mb-3 mt-3">
+                <label for="exampleFormControlInput1" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" placeholder="email@dominio.com" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}">
+            <% if (typeof createErrors !== 'undefined' && createErrors.email) { %>
+                <p class="error-message"><%= createErrors.email %></p>
+            <% } %>
+
+            </div>
+            <label for="exampleFormControlInput1" class="col-sm-2 col-form-label">Senha</label>
+            <div class=" row">
+                <div class="col-sm-9 input-group">
+                  <input type="password" class="form-control" id="passwordInput" name="password" placeholder="*******">
+                  <button class="btn btn-outline-secondary" type="button" id="togglePasswordButton"><i class="bi bi-eye-slash"></i></button>
+                </div>
+              </div>
+              <% if (typeof createErrors !== 'undefined' && createErrors.senha) { %>
+                <p class="error-message"><%= createErrors.senha %></p>
+                <% } %>
+            <label for="exampleFormControlInput1" class="col-sm-2 col-form-label">Confirmar senha</label>
+            <div class="mb-3 row">
+                <div class="col-sm-9 input-group">
+                  <input type="password" class="form-control" id="passwordInputConfirmation" name="confirmationPassword" placeholder="*******">
+                  <button class="btn btn-outline-secondary" type="button" id="togglePasswordButtonConfirmation"><i class="bi bi-eye-slash"></i></button>
+                </div>
+              </div>
+
+            <div class="col">
+                <div class="mb-3">
+                <button type="submit" class="btn btn-success float-end">Cadastrar</button>
+                </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+
+</body>
+<%- include('../partials/footer.ejs'); %>

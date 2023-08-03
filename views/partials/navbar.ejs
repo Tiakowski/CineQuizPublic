@@ -1,0 +1,81 @@
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="/"><img src="/img/Q.png" class="logo" alt=""></a>
+    <button class="btn btn-outline-dark btn-lg" onclick="RotateLines()" id="menuButton" type="button"
+      data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <div class="line1" id="line1"></div>
+      <div class="line2" id="line2"></div>
+      <div class="line3" id="line3"></div>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/recordes">Recordes</a>
+        </li>
+        <div class="dropdown nav-item">
+          <a class=" nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Diário
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/daily/movie">Filme</a></li>
+            <li><a class="dropdown-item" href="/daily/music">Música</a></li>
+          </ul>
+        </div>
+        <% if(role > 0){ %>
+          <div class="dropdown nav-item">
+            <a class=" nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Admin
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+              <li><a class="dropdown-item" href="/moviescontrol">Filmes</a></li>
+              <li><a class="dropdown-item" href="/dailycontrol">Daily</a></li>
+            </ul>
+          </div>
+          <% } %>
+      </ul>
+      <div id="app" class="search">
+        <div class="input-group">
+          <input class="form-control" @blur="clearSuggestions" @focus="fetchSuggestions" @input="fetchSuggestionsDebounced" v-model="searchTerm" type="text"   placeholder="Buscar usuário">
+          <button class="btn btn-success" type="button">Buscar <i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>        
+              <ul class="autocomplete-suggestions list-group w-100" v-if="searchTerm && suggestions.length > 0" v-cloak>
+                <a v-for="suggestion in suggestions" :key="suggestion.id" :href="'/user/profile/' + suggestion.username"
+                  class="text-decoration-none">
+                  <li class="list-group-item searchItem py-0" style="display: flex; align-items: center;">
+                    <img :src="`/api/user/profilepic/${suggestion.id}`" alt="Avatar" class=" suggestionProfilePic" />
+                    <div class="d-flex flex-column" style="overflow-x: auto;">
+                      <h6 style="font-size: 16px;" class="suggestionText mt-3">{{ suggestion.name }} {{ suggestion.surname
+                        }}</h6>
+                      <p class="text-muted word-wrap-break-word suggestionText"
+                        style="margin-top: -0.7rem; font-size: 14px">@{{ suggestion.username }}</p>
+                    </div>
+                  </li>
+                </a>
+              </ul>
+            
+      </div>
+      <% if (!isAuthenticated){ %>
+        <a href="/user/register" class="btn btn-outline-primary me-2">Cadastrar</a>
+        <a href="/user/login" class="btn btn-primary me-2">Login</a>
+        <% } else { %>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Perfil
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" id="dropdownPerfil">
+              <li><a class="dropdown-item" href="/user/myprofile">Meu perfil <i class="bi bi-person"></i></a></li>
+              <li><a class="dropdown-item" href="/user/settings">Configurações <i class="bi bi-gear"></i></a></li>
+              <li class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/api/user/logout">Sair <i class="bi bi-box-arrow-right"></i></a></li>
+            </ul>
+          </div>
+          <% } %>
+    </div>
+  </div>
+</nav>

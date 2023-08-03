@@ -1,0 +1,37 @@
+.dashboard {
+    background-color: aliceblue;
+    width: 60vw;
+    height: 80vh;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-group {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .selected {
+    order: 2; /* Define a ordem para 2, posicionando abaixo do grupo de botões */
+    width: 80%;
+    height: 80%;
+    background-color: rgb(187, 187, 187);
+    overflow-y: scroll;
+    overflow-x: scroll;
+  }
+
+
+  @media (max-width: 991.98px) {
+    .dashboard{
+      width: 100vw;
+    }
+
+    .selected{
+      width: 90%;
+    }
+  }

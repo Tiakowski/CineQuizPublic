@@ -1,0 +1,37 @@
+    <!-- Modal -->
+    <div class="modal fade" id="modalAvatar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Mudar avatar</i></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                        <div class="modal-body">
+                            <p class="text-muted">A atualização de avatar pode apresentar problemas em dispositivos mobile</p>
+                            <div class="container" id="box-crop">
+                                <div id="preview-crop" style="display: none"></div>
+                                <div class="box">
+                                    <h2 id="h2-avatar"></h2>
+                                    <form enctype="multipart/form-data" id="form">
+                                        <div class="mb-3">
+                                            <input type="file" class="form-control" class="custom-file-upload" accept="image/*" id="avatar-image">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="removeButton" style="display: none;">Limpar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="changeAvatar" style="display: none;">Mudar</button>
+                    </div>
+                </div>
+            
+        </div>
+      </div>
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" integrity="sha512-cyzxRvewl+FOKTtpBzYjW6x6IAYUCZy3sGP40hn+DQkqeluGRCax7qztK2ImL64SA+C7kVWdLI6wvdlStawhyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js" integrity="sha512-6lplKUSl86rUVprDIjiW8DuOniNX8UDoRATqZSds/7t6zCQZfaCe3e5zcGaQwxa8Kpn5RTM9Fvl3X2lLV4grPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="/js/cropper.js"></script>
+      

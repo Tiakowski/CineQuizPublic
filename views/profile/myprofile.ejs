@@ -1,0 +1,68 @@
+<%- include('../partials/header.ejs'); %>
+<body style=>
+<%- include('../partials/navbar.ejs'); %> 
+<%- include('../partials/cropper.ejs'); %>
+<%- include('../partials/changeName.ejs'); %>
+
+<section class="mt-4">
+    <div class="container-fluid" style="margin-bottom: 20%;">
+      <div class="row d-flex justify-content-center align-items-center ">
+        <div class="col col-lg-7 mb-4 mb-lg-0">
+          <div class="card mb-3" style="border-radius: .5rem;">
+            <div class="row g-0">
+              <div class="col-md-4 gradient-custom text-center text-white"
+                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                <img src="/api/user/profilepic/<%=user.id%>"
+                  alt="Avatar" class="mt-5 profilepic" id="currentProfilePic" data-user-id="<%=user.id%>"/>
+                  
+                  <a class="mx-auto mt-2 mb-4 d-block changeAvatar" data-bs-toggle="modal" data-bs-target="#modalAvatar"><i class="bi bi-pencil-square"></i></a>
+
+                <h5 style="color: #212529;"><%= user.name %> <%= user.surname %></h5> <a data-bs-toggle="modal" data-bs-target="#modalChangeName" class="changeName"><i class="bi bi-pencil-square"></i></a>
+                
+        
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h6>@<%= user.username %></h6>
+                    <a href="/user/profile/<%= user.username %>" style="max-height: 25px; display: flex; align-items: center; justify-content: center;" class="btn btn-secondary btn-sm">Ver perfil público</a>
+
+                </div>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Email</h6>
+                      <p class="text-muted word-wrap-break-word"><%= user.email %></p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Recorde</h6>
+                      <p class="text-muted"><%= user.record %></p>
+                    </div>
+                  </div>
+                  <h6>Amigos</h6>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Seguidores</h6>
+                      <p class="text-muted"><%= numberFollowers %></p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Segue</h6>
+                      <p class="text-muted"><%= numberFollowing %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+
+</body>
+<%- include('../partials/footer.ejs'); %>

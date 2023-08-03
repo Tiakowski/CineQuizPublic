@@ -1,0 +1,126 @@
+<%- include('partials/header.ejs'); %>
+<body >
+<%- include('partials/navbar.ejs'); %> 
+
+<div class="dashboard" id="dashboard" style="display: none;">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" @click="showUsersTable" class="btn btn-primary">Usuários</button>
+        <button type="button" @click="showProblemsTable" class="btn btn-primary">Problemas</button>
+        <button type="button" @click="showSuggestionsTable" class="btn btn-primary">Sugestões</button>
+        <button type="button" @click="showPostersTable" class="btn btn-primary">Poster</button>
+      </div>
+    <div class="selected" >
+      <!-- Usuários -->
+        <table class="table" v-if="showUsers">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Avatar</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Usuário</th>
+                <th scope="col">Ações</th>
+                <th scope="col">Cargo</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="user in users" :key="user.id">
+                <th style="font-size: 1.2rem; padding-top: 0.8rem;" scope="row">{{ user.id }}</th>
+                <td>
+                  <img :src="`/api/user/profilepic/${user.id}`" alt="Avatar" class="suggestionProfilePic" />
+                </td>
+                <td style="padding-top: 1rem;">{{ user.name }} {{user.surname}}</td>
+                <td style="padding-top: 1rem;" >@{{ user.username }}</td>
+                <td>
+                  <button style="margin-top: 0.4rem;" class="btn btn-danger btn-sm" @click="deleteUser(user.id)">
+                    Excluir conta
+                  </button>
+                </td>
+                <td>
+                  <select class="form-select"  :disabled="user.role == 2"  aria-label="Default select example" @change="changeRole(user.id, $event.target.value)">
+                    <option value="0" :selected="user.role == 0">Usuário</option>
+                    <option value="1" :selected="user.role == 1">Admin</option>
+                    <option value="2"  :selected="user.role == 2">Dono</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Problemas -->
+
+          <table class="table" id="users" v-if="showProblems">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="problem in problems" :key="problem.id">
+                <th style="font-size: 1.2rem; padding-top: 0.8rem;" scope="row">{{ problem.id }}</th>
+                <td style="padding-top: 1rem;">{{problem.title}}</td>
+                <td style="padding-top: 1rem;">{{problem.description}}</td>
+                <td>
+                  <button style="margin-top: 0.4rem;" class="btn btn-danger btn-sm" @click="deleteFeedback(problem.id)">
+                    Excluir problema
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Sugestões -->
+          <table class="table" v-if="showSuggestions">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Link</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="suggestion in suggestions" :key="suggestion.id">
+                <th style="font-size: 1.2rem; padding-top: 0.8rem;" scope="row">{{ suggestion.id }}</th>
+                <td style="padding-top: 1rem; overflow-y: scroll;">{{suggestion.title}}</td>
+                <td style="padding-top: 1rem; overflow-y: scroll;">{{suggestion.link}}</td>
+                <td>
+                  <button style="margin-top: 0.4rem;" class="btn btn-danger btn-sm" @click="deleteFeedback(suggestion.id)">
+                    Excluir sugestão
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Poster -->
+          <table class="table" v-if="showPosters">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="poster in posters" :key="poster.id">
+                <th style="font-size: 1.2rem; padding-top: 0.8rem;" scope="row">{{poster.id }}</th>
+                <td style="padding-top: 1rem;">{{poster.title}}</td>
+                <td>
+                  <button style="margin-top: 0.4rem;" class="btn btn-danger btn-sm" @click="deleteFeedback(poster.id)">
+                    Excluir
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+
+
+<script src="../js/dashboard.js"></script>
+<link rel="stylesheet" href="../css/dashboard.css">
+
+</body>
+<%- include('partials/footer.ejs'); %>

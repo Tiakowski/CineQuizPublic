@@ -1,0 +1,37 @@
+<!-- Modal -->
+  <div class="modal fade" id="modalFollowing" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <% if(usersFollowing !== null){ %>
+            <% usersFollowing.forEach(function(user) { %>
+	<ul class="list-group w-100">
+                <a href='/user/profile/<%= user.username %>'
+                  class="text-decoration-none">
+                  <li class="list-group-item searchItem py-0" style="display: flex; align-items: center;">
+                    <img src="/api/user/profilepic/<%= user.id%>" alt="Avatar" class=" suggestionProfilePic" />
+                    <div class="d-flex flex-column" style="overflow-x: auto;">
+                      <h6 style="font-size: 16px;" class="suggestionText mt-3"><%= user.name %></h6>
+                      <p class="text-muted word-wrap-break-word suggestionText"
+                        style="margin-top: -0.7rem; font-size: 14px">@<%= user.username %></p>
+                    </div>
+                  </li>
+                </a>
+              </ul>
+              <% }); %>
+          <% } else { %>
+            <div class="d-flex align-items-center" style="height: 100%">
+              <p class="mx-auto">Este usuário não segue ninguém!</p>
+            </div>
+          <% }; %>
+</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>

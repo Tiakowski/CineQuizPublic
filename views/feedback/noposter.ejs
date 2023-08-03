@@ -1,0 +1,27 @@
+<%- include('../partials/header.ejs'); %>
+<body>
+<%- include('../partials/navbar.ejs'); %> 
+
+<form action="/api/feedback/noposter" method="post" style="margin-bottom: 50vh;">
+    <div class="d-flex justify-content-center align-items-center mt-5" style="margin-bottom: 20%;">
+        <div class="card" style="width: 50rem;">
+          <div class="card-header text-center"><h3>Qual filme sem poster?</h3></div>
+          <div class="card-body">
+            <input type="hidden" name="type" value="2">
+            <form>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Título</label>
+                    <input type="title" class="form-control" name="title" placeholder="Il buono, il brutto, il cattivo">
+                </div>
+                    <div class="mb-3">
+                    <button type="submit" class="btn btn-success float-end">Enviar</button>
+                    </div>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </form>
+
+</body>
+<%- include('../partials/footer.ejs'); %>

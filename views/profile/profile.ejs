@@ -1,0 +1,71 @@
+<%- include('../partials/header.ejs'); %>
+<body style=>
+<%- include('../partials/navbar.ejs'); %>
+<%- include('following.ejs'); %>  
+<%- include('followers.ejs'); %> 
+<link rel="stylesheet" href="css/border.css">
+
+<section class="mt-4 main-container">
+    <div class="container-fluid" style="margin-bottom: 30%;">
+      <div class="row d-flex justify-content-center align-items-center ">
+        <div class="col col-lg-7 mb-4 mb-lg-0">
+          <div class="card mb-3" style="border-radius: .5rem;">
+            <div class="row g-0">
+              <div class="col-md-4 gradient-custom text-center text-white"
+                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                <img src="/api/user/profilepic/<%=user.id%>"
+                  alt="Avatar" class="mt-5 mb-3 border profilepic" id="currentProfilePic" data-user-id="<%=user.id%>"/>
+                <h5 id="userName" style="color: #212529; display: none;"><%= user.name %> <%= user.surname %></h5>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6>@<%= user.username %></h6>
+                        <% if (!isAuthenticated) { %>
+                            <a href="/user/login" style="max-height: 25px; display: flex; align-items: center; justify-content: center;" class="btn btn-success btn-sm">Seguir</a>
+                        <% } else if(user.id === userId) { %>
+                                <a href="/user/myprofile" style="max-height: 25px; display: flex; align-items: center; justify-content: center;" class="btn btn-secondary btn-sm">Ver perfil privado</a>
+                        <% } else { %>
+                            <% if (isFollowing) { %>
+                                  <button data-username="<%= user.username %>" type="button" class="btn btn-primary btn-sm follow-btn unfollowBtn">
+                                    <span class="button-content">Seguindo</span>
+                                  </button>
+                            <% } else { %>
+                                  <button data-username="<%= user.username %>" type="button" class="btn btn-success btn-sm follow-btn">Seguir</button>
+                            <% } %>
+                        <% } %>                    
+                    </div>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Recorde</h6>
+                      <p class="text-muted word-wrap-break-word"><%= user.record %></p>
+                    </div>
+                    <div class="col-6 mb-3">
+                       
+                    </div>
+                  </div>
+                  <h6>Amigos</h6>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Seguidores</h6>
+                      <p class="text-muted"><%= numberFollowers %><a id="followersButton" data-bs-toggle="modal" data-bs-target="#modalFollowers" style="margin-left: 10px;"><i class="fa-solid fa-user-group"></i></a></p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Segue</h6>
+                      <p class="text-muted"><%= numberFollowing %><a id="followingButton" data-bs-toggle="modal" data-bs-target="#modalFollowing" style="margin-left: 10px;"><i class="fa-solid fa-user-group"></i></a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <script src="/js/follow.js"></script>
+</body>
+<%- include('../partials/footer.ejs'); %>

@@ -1,0 +1,30 @@
+<%- include('../partials/header.ejs'); %>
+<body>
+<%- include('../partials/navbar.ejs'); %> 
+
+<form action="/api/feedback/problem" method="post" style="margin-bottom: 50vh;">
+    <div class="d-flex justify-content-center align-items-center mt-5">
+        <div class="card" style="width: 50rem;">
+          <div class="card-header text-center"><h3>O que há de errado? <i class="fa-solid fa-person-digging"></i></h3></div>
+          <div class="card-body">
+                <input type="hidden" value="0" name="type">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Título</label>
+                    <input type="text" class="form-control" name="title" placeholder="A pagina de configurações esta dando erro" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descrição</label>
+                    <textarea placeholder="Detalhes" required class="form-control" name="description" id="description" cols="30" rows="5"></textarea>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                    <button type="submit" class="btn btn-success float-end">Enviar</button>
+                    </div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+</body>
+<%- include('../partials/footer.ejs'); %>

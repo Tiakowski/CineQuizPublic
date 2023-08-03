@@ -1,0 +1,35 @@
+ <!-- Modal -->
+ <div class="modal fade" id="modalChangeName" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+            <div class="modal-content">
+              <% if (typeof nameError !== 'undefined') { %>
+                <p class="error-message"><%= nameError %></p>
+              <% } %>
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Alterar nome</i></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body">
+                        <form action="/api/user/changename" method="post">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="name" id="floatingName" value="<%= user.name %>">
+                                <label for="floatingName">Nome</label>
+                              </div>
+                              <div class="form-floating">
+                                <input type="text" class="form-control" name="surname" id="floatingSurname" value="<%= user.surname %>">
+                                <label for="floatingSurname">Sobrenome</label>
+                              </div>
+                        
+                    </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="removeButton" style="display: none;">Limpar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="changeName">Mudar</button>
+              </form>
+                </div>
+            </div>
+    </div>
+  </div>
+
+  
+  
