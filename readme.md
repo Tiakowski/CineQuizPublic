@@ -40,4 +40,4 @@ Este é um projeto de "Quiz de Filmes" com modos "infinito" e diário, onde os u
 
 ## Contato
 
-Se você tiver alguma dúvida ou precisar de ajuda com este projeto, entre em contato através do email: tiagosantosrazr@gmail.com. adiciona essas coisas que eu fisse nas funcionalidades
+Se você tiver alguma dúvida ou precisar de ajuda com este projeto, entre em contato através do email: tiagosantosrazr@gmail.com.
