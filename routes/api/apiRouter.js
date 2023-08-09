@@ -10,6 +10,7 @@ const isAuthenticated = require("../../middlewares/isAuthenticated");
 const upload = require('../../middlewares/uploadMiddleware');
 const authorizationMiddleware = require("../../middlewares/authorizationMiddleware");
 const HomeController = require("../../controllers/HomeController");
+const MusicController = require("../../controllers/MusicController");
 
 
 router.post('/user/create', validateRequest ,UserController.create);
@@ -60,6 +61,18 @@ router.post("/movie/attmovie",authorizationMiddleware, MovieController.attMovie)
 router.post("/movie/daily/attmovie",authorizationMiddleware, MovieController.addDailyMovie)
 router.get("/movie/getdailymovie", MovieController.getDailyMovie)
 router.get("/movie/getalldailymovie",authorizationMiddleware, MovieController.getAllDailyMovies)
+
+//Music
+router.post("/movie/daily/addmusic",authorizationMiddleware, MusicController.addDailyMusic)
+router.get("/music/search/:singer", MusicController.searchSingers)
+router.get("/music/getalldailymusics", authorizationMiddleware, MusicController.getAllMusics)
+router.get("/music/deletemusic/:id", authorizationMiddleware, MusicController.deleteMusic)
+router.get("/music/getdailymusic", MusicController.getDailyMusic)
+router.get("/music/gettip/:id/:tip", MusicController.getTip)
+router.get("/music/verify/:id/:answer", MusicController.verify);
+router.get("/music/singer/:id", MusicController.getSinger)
+router.get("/music/title/:id", MusicController.getTitle)
+router.get("/music/poster/:id", MusicController.getPoster)
 
 
 module.exports = router;

@@ -3,10 +3,62 @@
 <body >
 <%- include('../partials/navbar.ejs'); %> 
 <%- include('../partials/recruiter.ejs'); %>
-
-<div class="background-music">
-    
+<div id="counter" class="counter">
+    <h4>Próxima música em: {{hours}}{{separateHours}}{{minutes}}:{{seconds}}</h4>    
 </div>
+
+<div class="background-music" id="dailyMusic">
+  <div v-if="!callLost" class="lost">
+    <div v-if="showBlackScreen" class="blackScreen" id="blackScreen"></div>   
+        <div class="chances-quiz">
+            <div class="first gray"></div>
+            <div class="second gray"></div>
+            <div class="third gray"></div>
+            <div class="fourth gray"></div>
+            <div class="fifth gray"></div>
+            <div class="sixth gray"></div>
+        </div>
+        
+
+        <button id="start" @click="start" v-if="showStartButton" type="button" class="start btn-lg btn btn-info">Começar <i class="fa-solid fa-play"></i></button>
+        <button id="start-mobile" @click="start" v-if="showStartButton" type="button" class="start-mobile btn btn-info">Começar <i class="fa-solid fa-play"></i></button>
+
+        <div class="tip border border-dark">
+            <h2 v-html="tip"></h2>
+        </div>
+
+        <div class="movie-search" >
+            <div class="input-group disabled">
+                <input class="input-search form-control" :disabled="isDisabledInput"  @focus="fetchSuggestions" @input="fetchSuggestionsDebounced" v-model="searchTerm" type="text" placeholder="Procurar artista">
+                <button class="button-search btn btn-success" :disabled="isDisabledInputButton"  @click="verify" type="button">Chutar <i class="fa-solid fa-microphone"></i></button>
+              </div>
+              <div>
+                <ul class="movies-list  list-group dropdown-menu" style="width: 100%; max-height: 30vh; overflow-y: auto;" v-if="searchTerm && suggestions.length > 0">
+                    <a v-for="suggestion in suggestions" :key="suggestion.id" @click="selectSuggestion(suggestion)" class="text-decoration-none">
+                      <li class="list-group-item" style="display: flex; padding: 10px; margin: 0; align-items: center;">
+                        <p style="margin-bottom: 0;">{{suggestion.singer }}</p>
+                      </li>
+                    </a>
+                  </ul>
+              </div>
+        </div>
+        <div class="next-clue">
+            <button type="button" @click="nextTip" :disabled="isDisabledNextTip" class="btn btn-secondary mr-2">Próxima frase <i class="fa-solid fa-music"></i> </button>
+
+        </div>
+  </div>
+  <div v-if="callLost" class="answer">
+    <h1 class="title">{{singer}}</h1>
+    <h4 class="music">{{title}}</h4>
+    <div class="img-container">
+        <img class="img-answer" :src="poster" alt="">
+    </div>
+  </div>
+
+</div>
+
+<script src="../js/daily/dailyMusic.js"></script>
+<script src="../js/daily/counter.js"></script>
 
 </body>
 <%- include('../partials/footer.ejs'); %>

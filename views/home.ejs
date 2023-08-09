@@ -1,0 +1,28 @@
+<%- include('partials/header.ejs'); %>
+<%- include('partials/recruiter.ejs'); %>
+<link rel="stylesheet" href="../css/home.css">
+<body >
+<%- include('partials/navbar.ejs'); %> 
+<div class="button-container">
+    <a href="/daily/movie">
+    <button class="movie btn btn-info" style="color:white">
+       <h1>Filme</h1>
+       <h3>Diário</h3>
+    </button>
+    </a>
+    <a href="/daily/music">
+    <button class="music btn btn-info" style="color:white">
+        <h1>Música</h1>
+        <h3>Diário</h3>
+    </button>
+    </a>
+    <a href="/movies/quiz">
+    <button class="movie btn btn-info" style="color:white">
+        <h1>Filmes</h1>
+        <h3>Ilimitado</h3>
+    </button>
+    </a>
+</div>
+
+</body>
+<%- include('partials/footer.ejs'); %>

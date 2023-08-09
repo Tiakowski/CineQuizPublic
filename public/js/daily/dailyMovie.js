@@ -115,12 +115,12 @@ new Vue({
 
         saveLastGame(){
           const today = new Date().toLocaleDateString();
-          localStorage.setItem('lastplay', today)
+          localStorage.setItem('lastplay-movie', today)
         },
 
         userPlayed(){
           const today = new Date().toLocaleDateString();
-          const lastplay = localStorage.getItem('lastplay')
+          const lastplay = localStorage.getItem('lastplay-movie')
           if(today == lastplay){
             this.playedToday = true
           } else { 
@@ -319,33 +319,6 @@ new Vue({
 
         },
 
-        nextMovie(){
-            this.tips = [];
-            chances = ["first", "second", "third", "fourth", "fifth", "sixth"];
-            tips = ['year', 'runtime','genre', 'director', 'star1', 'star2']
-            tipsPtBr = ["Ano", "Tempo de filme", "Gênero", "Diretor", "Atores", "Atores"]
-            this.poster = ''
-            this.callLost = false
-            this.showNextButton = false,
-            this.getTip()
-            turniningGreen()
-            this.getMeta()
-        },
-
-        skipMovie(){
-            this.buttonTipContent = 'Próxima dica'
-            if(this.skip == 1){
-                this.isDisabledSkip = true
-            }
-
-            if(this.skip != 0 && currentMovie != -1) {
-            this.nextMovie()
-            this.isDisabled = false
-            this.skip -= 1
-            this.isDisabled = true
-            }
-            this.getMeta()
-        },
 
         savePoints(){
             axios.get("api/movies/newrecord/"+this.points)

@@ -3,6 +3,7 @@ new Vue({
     data: {
       id: 0,
       searchTerm: '',
+      searchTermMusic: '',
       date:'',
       title_no_accent:'',
       runtime:'',
@@ -16,31 +17,62 @@ new Vue({
       year:'',
       poster:'',
       suggestions: [],
-      allDailyMovies: []
+      musicSuggestions:[],
+      allDailyMovies: [],
+      allDailyMusics: [],
+      titleMusic: '',
+      musicDate:'',
+      singer:'',
+      lyrics_1:'',
+      lyrics_2:'',
+      lyrics_3:'',
+      lyrics_4:'',
+      lyrics_5:'',
+      lyrics_6:''
     },
     mounted(){
-      this.getAllDailyMovies()
+      this.getAllDailyMovies(),
+      this.getAllDailyMusics()
     },
     methods: {
-      fetchSuggestionsDebounced(){
+      fetchSuggestionsDebounced(type){
         clearTimeout(this.timeout);
 
         this.timeout = setTimeout(()=> {
-            this.fetchSuggestions();
+            this.fetchSuggestions(type);
         },300)
     },
-      fetchSuggestions() {
-        if (!this.searchTerm) {
-          this.suggestions = [];
-          return;
+      fetchSuggestions(type) {
+        if(type == "movies"){
+          if (!this.searchTerm) {
+            this.suggestions = [];
+            return;
+          }
+        }  else if (type == 'music') {
+          if (!this.searchTermMusic) {
+            this.musicSuggestions = [];
+            return;
         }
-        axios.get('/api/movies/search/' + this.searchTerm)
+        }
+
+        var search = null
+        if(type == "movies"){
+          search = this.searchTerm
+        } else {
+          search = this.searchTermMusic
+        }
+
+        axios.get(`/api/${type}/search/${search}`)
           .then(response => {
-            if(!response.data){
-              this.suggestions = []
+            if(type == "movies"){
+              const data = response.data
+              this.suggestions = data;
+            } else if (type == "music"){
+              const data = response.data
+              this.musicSuggestions = data
             }
-            const users = response.data
-            this.suggestions = users;
+             
+
           })
           .catch(error => {
             if (error.message !== 'A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received') {
@@ -60,6 +92,10 @@ new Vue({
         this.suggestions = [];
 
     },
+      selectMusicSuggestion(suggestion){
+        this.searchTermMusic = suggestion.singer;
+        this.musicSuggestions = [];
+      },
     getmovie(){
         axios.get("/api/movie/dashboardgetmovie/"+this.searchTerm).then(response => {
             const movie = response.data;
@@ -110,7 +146,58 @@ new Vue({
       }).catch(error => {
         console.log(error)
       })
+    },
+                    // MÚSICA
+
+
+    addMusic(){
+      const music = {
+        singer: this.searchTermMusic,
+        date: this.musicDate,
+        title: this.titleMusic,
+        lyrics_1: this.lyrics_1,
+        lyrics_2: this.lyrics_2,
+        lyrics_3: this.lyrics_3,
+        lyrics_4: this.lyrics_4,
+        lyrics_5: this.lyrics_5,
+        lyrics_6: this.lyrics_6,
+        poster: this.poster
+      }
+      axios.post("/api/movie/daily/addmusic", music)
+          .then(response => {
+            this.searchTermMusic = '';
+            this.musicDate = '';
+            this.titleMusic = '';
+            this.lyrics_1 = '';
+            this.lyrics_2 = '';
+            this.lyrics_3 = '';
+            this.lyrics_4 = '';
+            this.lyrics_5 = '';
+            this.lyrics_6 = '';
+            this.poster = '';
+
+          }).catch(error => {
+              console.log(error)
+          })
+      
+    },
+    getAllDailyMusics(){
+      axios.get("/api/music/getalldailymusics").then(response => {
+        this.allDailyMusics = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
+    deleteMusic(id){
+      axios.get("/api/music/deletemusic/"+id).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
     }
+    
+
 
     
     }

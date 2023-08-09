@@ -8,7 +8,8 @@ const authorizationMiddleware = require("../../middlewares/authorizationMiddlewa
 const MovieController = require("../../controllers/MovieController");
 
 
-router.get('/', HomeController.index);
+router.get('/', HomeController.home);
+router.get('/movies/quiz', HomeController.index);
 router.get('/recordes',HomeController.records);
 router.get('/user/register',blockIfAuthenticated, HomeController.register);
 router.get('/user/login',blockIfAuthenticated, HomeController.login);

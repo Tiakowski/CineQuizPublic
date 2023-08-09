@@ -201,7 +201,7 @@ new Vue({
         lost(){
             this.savePoints()
             this.showRepeatButton = true
-            axios.get("api/movies/poster/" + currentMovie)
+            axios.get("/api/movies/poster/" + currentMovie)
                     .then(response => {
                         this.poster = response.data.poster;
 
@@ -218,7 +218,7 @@ new Vue({
                         console.log(error)
                     })
 
-            axios.get("api/movies/title/" + currentMovie)
+            axios.get("/api/movies/title/" + currentMovie)
                 .then(response => {
                     this.title = response.data.title;
                     })
@@ -277,7 +277,7 @@ new Vue({
             this.showRepeatButton = false,
             this.callLost = true
             this.showNextButton = true
-            axios.get("api/movies/poster/" + currentMovie)
+            axios.get("/api/movies/poster/" + currentMovie)
                     .then(response => {
                         this.poster = response.data.poster;
 

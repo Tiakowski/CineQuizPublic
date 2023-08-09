@@ -6,6 +6,21 @@ const Movies = require("../models/Movies")
 
 class HomeController{
 
+    async home(req, res){
+        var userId = req.userId;
+        if(userId){
+            var user = await User.findById(req.userId);
+            if (user) {
+                delete user.password;
+                delete user.username_uppercase;
+                delete user.email;  
+            }  
+        } else {
+            var user = null
+        }
+        res.render("home",{user, isAuthenticated: res.locals.isAuthenticated } )
+    }
+
     async index(req, res){
         var userId = req.userId;
         if(userId){
@@ -34,7 +49,18 @@ class HomeController{
     }
 
     async dailyMusic(req, res){
-        res.render("daily/music")
+        var userId = req.userId;
+        if(userId){
+            var user = await User.findById(req.userId);
+            if (user) {
+                delete user.password;
+                delete user.username_uppercase;
+                delete user.email;  
+            }  
+        } else {
+            var user = null
+        }
+        res.render("daily/music", {user, isAuthenticated: res.locals.isAuthenticated })
     }
 
     async dailyMovie(req, res){

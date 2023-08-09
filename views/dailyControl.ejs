@@ -12,6 +12,12 @@
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Lista de filmes</button>
         </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-music-tab" data-bs-toggle="pill" data-bs-target="#pills-music" type="button" role="tab" aria-controls="pills-music" aria-selected="false">Adicionar música</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-musiclist-tab" data-bs-toggle="pill" data-bs-target="#pills-musiclist" type="button" role="tab" aria-controls="pills-musiclist" aria-selected="false">Lista de Músicas</button>
+        </li>
       </ul>
 
       <div class="tab-content" id="pills-tabContent">
@@ -22,7 +28,7 @@
                       <div class="list">
                         <label for="title">Filme</label>
                         <div class="input-group">
-                          <input class="form-control" @focus="fetchSuggestions" @input="fetchSuggestionsDebounced" v-model="searchTerm" type="text" placeholder="Procurar filme">
+                          <input class="form-control" @focus="fetchSuggestions('movies')" @input="fetchSuggestionsDebounced('movies')" v-model="searchTerm" type="text" placeholder="Procurar filme">
                           <button class="btn btn-success" @click="getmovie" type="button">Buscar <i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                           <ul class="movies-list  list-group dropdown-menu" style="width: 100%; max-height: 30vh; overflow-y: auto;" v-if="searchTerm && suggestions.length > 0">
@@ -51,22 +57,22 @@
       
                       <div class="row mb-3">
                         <div class="col">
-                          <label for="title_no_accent">Gênero</label>
+                          <label for="genre">Gênero</label>
                           <input type="text" v-model="genre" class="form-control" name="genre" required>
                         </div>
                         <div class="col">
-                          <label for="runtime">Nota MetaScore</label>
+                          <label for="metaScore">Nota MetaScore</label>
                           <input type="number" v-model="metascore" class="form-control" name="metaScore" required>
                         </div>
                       </div>
       
                       <div class="row mb-3">
                         <div class="col">
-                          <label for="title_no_accent">Diretor</label>
+                          <label for="director">Diretor</label>
                           <input type="text" v-model="director" class="form-control" name="director" required>
                         </div>
                         <div class="col">
-                          <label for="runtime">Ator 1</label>
+                          <label for="actor1">Ator 1</label>
                           <input type="text" v-model="actor1" class="form-control" name="actor1" required>
                         </div>
                       </div>
@@ -74,22 +80,22 @@
                       
                       <div class="row mb-3">
                         <div class="col">
-                          <label for="title_no_accent">Ator 2</label>
+                          <label for="actor2">Ator 2</label>
                           <input type="text" v-model="actor2" class="form-control" name="actor2" required>
                         </div>
                         <div class="col">
-                          <label for="runtime">Ator 3</label>
+                          <label for="actor3">Ator 3</label>
                           <input type="text" v-model="actor3" class="form-control" name="actor3" required>
                         </div>
                       </div>
       
                       <div class="row mb-3">
                         <div class="col">
-                          <label for="title_no_accent">Ator 4</label>
+                          <label for="actor4">Ator 4</label>
                           <input type="text" v-model="actor4" class="form-control" name="actor4" required>
                         </div>
                         <div class="col">
-                          <label for="runtime">Ano de lançamento</label>
+                          <label for="year">Ano de lançamento</label>
                           <input type="number" v-model="year" class="form-control" name="year" required>
                         </div>
                       </div>
@@ -123,10 +129,100 @@
               </ul>
             </div>
           </div>
+
+                                                    <!--CONTROLE DE MÚSICA -->
+
+
+          <div class="tab-pane fade" id="pills-music" role="tabpanel" aria-labelledby="pills-music-tab" tabindex="0">
+            <div class="item-admin">
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="musicTitle">Título da música</label>
+                  <input type="text" v-model="titleMusic" class="form-control" name="musicTitle" required>
+                </div>
+              </div>
+              <hr>
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="singer">Artista</label>
+                  <input type="text" @focus="fetchSuggestions('music')" @input="fetchSuggestionsDebounced('music')" v-model="searchTermMusic" class="form-control" name="singer" required>
+                  <div class="list">
+                  <ul class="movies-list  list-group dropdown-menu" style="width: 100%; max-height: 30vh; overflow-y: auto;" v-if="searchTermMusic && musicSuggestions.length > 0">
+                    <a v-for="music in musicSuggestions" :key="music.id" @click="selectMusicSuggestion(music)" class="text-decoration-none">
+                      <li class="list-group-item" style="display: flex; padding: 10px; margin: 0; align-items: center;">
+                        <p style="margin-bottom: 0;">{{music.singer }}</p>
+                      </li>
+                    </a>
+                  </ul>
+                </div>
+                </div>
+                <div class="col">
+                  <label for="dateMusic">Data</label>
+                  <input type="date" v-model="musicDate" class="form-control" name="dateMusic" required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="lyrics_1">Primeira frase</label>
+                  <input type="text" v-model="lyrics_1" class="form-control" name="lyrics_1" required>
+                </div>
+                <div class="col">
+                  <label for="lyrics_2">Segunda frase</label>
+                  <input type="text" v-model="lyrics_2" class="form-control" name="lyrics_2" required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="lyrics_3">Terceira frase</label>
+                  <input type="text" v-model="lyrics_3" class="form-control" name="lyrics_3" required>
+                </div>
+                <div class="col">
+                  <label for="lyrics_4">Quarta frase</label>
+                  <input type="text" v-model="lyrics_4" class="form-control" name="lyrics_4" required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="lyrics_5">Quinta frase</label>
+                  <input type="text" v-model="lyrics_5" class="form-control" name="lyrics_5" required>
+                </div>
+                <div class="col">
+                  <label for="lyrics_6">Sexta frase</label>
+                  <input type="text" v-model="lyrics_6" class="form-control" name="lyrics_6" required>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="lyrics_5">Poster</label>
+                  <input type="url" v-model="poster" class="form-control" name="lyrics_5" required>
+                </div>
+              </div>
+              <button @click="addMusic" class="btn btn-success">Adicionar</button>
+            </div>
+            
+          </div>
+          <div class="tab-pane fade" id="pills-musiclist" role="tabpanel" aria-labelledby="pills-musiclist-tab" tabindex="0">
+            <div class="item-admin">
+              <ul class="movies-list list-group" style="width: 100%; max-height: 30vh; overflow-y: auto;" v-if="allDailyMusics.length > 0">
+                <a v-for="music in allDailyMusics" :key="music.id" class="text-decoration-none">
+                  <li class="list-group-item d-flex justify-content-between align-items-center" style="width: 30vw; padding: 10px; margin: 0;">
+                    <p style="margin-bottom: 0;">{{music.title}}</p>
+                    <div class="d-flex align-items-center">
+                      <p style="margin-bottom: 0; margin-right: 10px;">{{(new Date(music.date)).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' }) }}</p>
+                      <button @click="deleteMusic(music.id)" class="btn btn-sm btn-outline-danger">Excluir</button>
+                    </div>
+                  </li>
+                </a>
+              </ul>
+            </div>
+          </div>
           
       </div>
 </div>
-      </div>
+</div>
 </div>
 
 
