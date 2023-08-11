@@ -230,6 +230,20 @@ class Movies {
         const movies = await knex.select("*").from("daily_movie").orderBy("date", "desc");
         return movies;
       }
+
+      async deleteDailyMovie(id){
+        try {
+          const result = await knex('daily_movie').where({id: id}).del()
+          if(result){
+            return {statusCode:200, status: true, error: null}
+          } else {
+            return {statusCode:404, status: false, error: "Filme não encontrada"}
+          }
+        } catch (error) {
+          return {statusCode:500, status: false, error: error}
+        }
+      }   
+    
       
 
 }

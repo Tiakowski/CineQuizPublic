@@ -18,6 +18,11 @@ new Vue({
       poster:'',
       suggestions: [],
       musicSuggestions:[],
+      selectedOption: null,
+      showEditSinger: false,
+      showAddSinger: false,
+      showDeleteSinger: false,
+      deleteSingerId:'',
       allDailyMovies: [],
       allDailyMusics: [],
       titleMusic: '',
@@ -33,6 +38,24 @@ new Vue({
     mounted(){
       this.getAllDailyMovies(),
       this.getAllDailyMusics()
+    },
+    watch: {
+      selectedOption(newVal){
+        if(newVal == "edit"){
+          this.showAddSinger = false,
+          this.showDeleteSinger = false,
+          this.showEditSinger = true
+          console.log("AQYU")
+        } else if (newVal == "add"){
+          this.showAddSinger = true,
+          this.showDeleteSinger = false,
+          this.showEditSinger = false
+        } else if (newVal == "delete"){
+          this.showAddSinger = false,
+          this.showDeleteSinger = true,
+          this.showEditSinger = false
+        }
+      }
     },
     methods: {
       fetchSuggestionsDebounced(type){
@@ -95,6 +118,7 @@ new Vue({
       selectMusicSuggestion(suggestion){
         this.searchTermMusic = suggestion.singer;
         this.musicSuggestions = [];
+        this.deleteSingerId = suggestion.id;
       },
     getmovie(){
         axios.get("/api/movie/dashboardgetmovie/"+this.searchTerm).then(response => {
@@ -147,6 +171,15 @@ new Vue({
         console.log(error)
       })
     },
+
+    deleteMovie(id){
+      console.log(id)
+      axios.get("/api/dailymovie/deletemovie/"+id).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
                     // MÚSICA
 
 
@@ -195,9 +228,16 @@ new Vue({
       }).catch(error => {
         console.log(error)
       })
+    },
+
+    deleteSinger(id){
+      axios.get("/api/music/deletesinger/"+ this.deleteSingerId).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
     }
     
-
 
     
     }

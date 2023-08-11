@@ -132,6 +132,15 @@ class MovieController{
         const movies = await Movies.getAllDailyMovies()
         res.json(movies)
     }
+
+    async deleteDailyMovie(req, res){
+        const id = req.params.id
+        console.log(id)
+        const result = await Movies.deleteDailyMovie(id)
+        res.sendStatus(result.statusCode)
+    }
+
+    
     
 
     

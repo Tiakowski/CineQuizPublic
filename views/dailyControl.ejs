@@ -18,6 +18,9 @@
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="pills-musiclist-tab" data-bs-toggle="pill" data-bs-target="#pills-musiclist" type="button" role="tab" aria-controls="pills-musiclist" aria-selected="false">Lista de Músicas</button>
         </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-editsinger-tab" data-bs-toggle="pill" data-bs-target="#pills-editsinger" type="button" role="tab" aria-controls="pills-editsinger" aria-selected="false">Editar artista</button>
+        </li>
       </ul>
 
       <div class="tab-content" id="pills-tabContent">
@@ -123,7 +126,10 @@
                 <a v-for="movie in allDailyMovies" :key="movie.id_movie" class="text-decoration-none">
                   <li class="list-group-item d-flex justify-content-between" style="width: 30vw; padding: 10px; margin: 0; align-items: center;">
                     <p style="margin-bottom: 0;">{{movie.title}}</p>
-                    <p style="margin-bottom: 0;">{{ (new Date(movie.date)).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' }) }}</p>
+                    <div class="d-flex align-items-center">
+                      <p style="margin-bottom: 0; margin-right: 10px;">{{(new Date(movie.date)).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' }) }}</p>
+                      <button @click="deleteMovie(movie.id)" class="btn btn-sm btn-outline-danger">Excluir</button>
+                    </div>
                   </li>
                 </a>
               </ul>
@@ -221,6 +227,72 @@
           </div>
           
       </div>
+      <div class="tab-pane fade" id="pills-editsinger" role="tabpanel" aria-labelledby="pills-editsinger-tab" tabindex="0">
+        <div class="item-admin">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" v-model="selectedOption" value="edit" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Editar
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" v-model="selectedOption" value="add" name="flexRadioDefault" id="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Adicionar
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" v-model="selectedOption" value="delete" name="flexRadioDefault" id="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Excluir
+            </label>
+            <hr>
+          </div>
+          <div v-if="showEditSinger">
+            <label for="singer">Editar artista</label>
+            <input type="text" @focus="fetchSuggestions('music')" @input="fetchSuggestionsDebounced('music')" v-model="searchTermMusic" class="form-control" name="singer" required>
+            <div class="list">
+            <ul class="movies-list  list-group dropdown-menu" style="width: 100%; max-height: 30vh; overflow-y: auto;" v-if="searchTermMusic && musicSuggestions.length > 0">
+              <a v-for="music in musicSuggestions" :key="music.id" @click="selectMusicSuggestion(music)" class="text-decoration-none">
+                <li class="list-group-item" style="display: flex; padding: 10px; margin: 0; align-items: center;">
+                  <p style="margin-bottom: 0;">{{music.singer }}</p>
+                </li>
+              </a>
+            </ul>
+            <hr>
+            <label for="">Novo nome</label>
+            <input type="text" class="form-control" name="singerEdit" required>
+            <button style="margin-top: 3px;" class="btn btn-info">Editar</button>
+          </div>
+
+
+        </div>
+            <div v-if="showAddSinger">
+              <form action="/api/music/addsinger" method="post">
+                <label for="singer">Adicionar artista</label>
+                <input type="text" class="form-control" name="singer" required>
+                <button type="submit" style="margin-top: 3px;" class="btn btn-success">Adicionar</button>
+             </form>
+          </div>
+
+
+          <div v-if="showDeleteSinger">
+            <label for="singer">Excluir artista</label>
+            <input type="text" @focus="fetchSuggestions('music')" @input="fetchSuggestionsDebounced('music')" v-model="searchTermMusic" class="form-control" name="singer" required>
+            <div class="list">
+            <ul class="movies-list  list-group dropdown-menu" style="width: 100%; max-height: 30vh; overflow-y: auto;" v-if="searchTermMusic && musicSuggestions.length > 0">
+              <a v-for="music in musicSuggestions" :key="music.id" @click="selectMusicSuggestion(music)" class="text-decoration-none">
+                <li class="list-group-item" style="display: flex; padding: 10px; margin: 0; align-items: center;">
+                  <p style="margin-bottom: 0;">{{music.singer }}</p>
+                </li>
+              </a>
+            </ul>
+          </div>
+          <button @click="deleteSinger(searchTermMusic)" style="margin-top: 3px;" class="btn btn-danger">Excluir</button>
+        </div>
+      </div>
+      
+  </div>
 </div>
 </div>
 </div>

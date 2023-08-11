@@ -112,6 +112,24 @@ class Musics{
             return error
         }
     }
+
+    async deleteSinger(id){
+      try {
+        const result = await knex('singers').where({id: id}).del()
+        if(result){
+          return {statusCode:200, status: true, error: null}
+        } else {
+          return {statusCode:404, status: false, error: "Artista não encontrada"}
+        }
+      } catch (error) {
+        return {statusCode:500, status: false, error: error}
+      }
+    }
+
+    async addMusic(singer){
+      const result = await knex.insert({singer}).table("singers")
+      return result ? true : false
+    }
 }
 
 module.exports = new Musics();

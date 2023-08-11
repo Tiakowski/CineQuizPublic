@@ -61,6 +61,7 @@ router.post("/movie/attmovie",authorizationMiddleware, MovieController.attMovie)
 router.post("/movie/daily/attmovie",authorizationMiddleware, MovieController.addDailyMovie)
 router.get("/movie/getdailymovie", MovieController.getDailyMovie)
 router.get("/movie/getalldailymovie",authorizationMiddleware, MovieController.getAllDailyMovies)
+router.get("/dailymovie/deletemovie/:id", authorizationMiddleware, MovieController.deleteDailyMovie)
 
 //Music
 router.post("/movie/daily/addmusic",authorizationMiddleware, MusicController.addDailyMusic)
@@ -73,6 +74,8 @@ router.get("/music/verify/:id/:answer", MusicController.verify);
 router.get("/music/singer/:id", MusicController.getSinger)
 router.get("/music/title/:id", MusicController.getTitle)
 router.get("/music/poster/:id", MusicController.getPoster)
+router.get("/music/deletesinger/:id", authorizationMiddleware, MusicController.deleteSinger)
+router.post("/music/addsinger", authorizationMiddleware, MusicController.addSinger)
 
 
 module.exports = router;

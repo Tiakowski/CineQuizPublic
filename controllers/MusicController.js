@@ -79,6 +79,19 @@ class MusicController {
         res.json(result)
         
     }
+
+    async deleteSinger(req, res){
+        const id = req.params.id
+        const result = await Music.deleteSinger(id)
+        res.sendStatus(result.statusCode)
+    }
+
+    async addSinger(req, res){
+        const singer = req.body.singer
+        const result = await Music.addMusic(singer)
+        console.log(result)
+        res.redirect("/dailycontrol")
+    }
 }
 
 module.exports = new MusicController()
