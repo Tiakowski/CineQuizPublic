@@ -42,7 +42,12 @@ class MusicController {
 
     async getDailyMusic(req, res){
         const music = await Music.dailyMusic()
-        res.json(music.id)
+        if(music){
+            res.json(music.id)
+        } else {
+            res.json(null)
+        }
+        
     }
 
     async getTip(req, res){

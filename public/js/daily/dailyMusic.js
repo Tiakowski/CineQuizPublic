@@ -37,13 +37,14 @@ new Vue({
         axios.get('/api/music/getdailymusic')
                 .then(response => {
                    currentMusic = response.data
-                    console.log(currentMusic)
-                   this.userPlayed()
-                    if(this.playedToday){
-                      this.showStartButton = false
-                      this.showBlackScreen = false
-                      this.win()
-                    }    
+                    if(currentMusic != null){
+                        this.userPlayed()
+                        if(this.playedToday){
+                          this.showStartButton = false
+                          this.showBlackScreen = false
+                          this.win()
+                        }    
+                    }
                 })
                 .catch(error => {
                     if (error.message !== 'A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received') {
@@ -114,20 +115,23 @@ new Vue({
         },
 
         start() {
-            this.showStartButton = false
-            this.showBlackScreen = false
-            this.isDisabledInput = false
-            this.isDisabledInputButton = false
-            this.isDisabledNextTip = false
-            turniningGreen()
-            this.getTip()
-            
-            
-           
+
+            if(currentMusic != null){
+                this.showStartButton = false
+                this.showBlackScreen = false
+                this.isDisabledInput = false
+                this.isDisabledInputButton = false
+                this.isDisabledNextTip = false
+                turniningGreen()
+                this.getTip()   
             setTimeout(() => {
                 this.showTipsButton = true
             }, 10);
-            
+            } else {
+                this.tip = "Sem música pra hoje :("
+                this.showStartButton = false
+                this.showBlackScreen = false
+            }
         },
 
         openMenu(){
