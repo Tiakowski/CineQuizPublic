@@ -36,6 +36,21 @@ class HomeController{
         res.render("index",{user, isAuthenticated: res.locals.isAuthenticated } )
     }
 
+    async howToPlay(req, res){
+        var userId = req.userId;
+        if(userId){
+            var user = await User.findById(req.userId);
+            if (user) {
+                delete user.password;
+                delete user.username_uppercase;
+                delete user.email;  
+            }  
+        } else {
+            var user = null
+        }
+        res.render("howToPlay", {user, isAuthenticated: res.locals.isAuthenticated})
+    }
+
     async error404(req, res){
         res.status(404).render('404', {url: req.url, isAuthenticated: res.locals.isAuthenticated  });
     }

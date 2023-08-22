@@ -24,6 +24,7 @@ router.get("/moviescontrol", authorizationMiddleware, HomeController.moviesContr
 router.get("/daily/music", HomeController.dailyMusic)
 router.get("/daily/movie", HomeController.dailyMovie)
 router.get("/dailycontrol",authorizationMiddleware, HomeController.dailyControl)
+router.get("/howtoplay", HomeController.howToPlay)
 
 
 

@@ -1,0 +1,74 @@
+<%- include('partials/header.ejs'); %>
+<body>
+<%- include('partials/navbar.ejs'); %> 
+<div class="accordion" id="accordionPanelsStayOpenExample" style="margin: 3vh 5vw">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+            <i class="fa-solid fa-calendar" style="margin-right: 0.5rem;"></i>  Modo diário
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <strong>Como funciona?</strong> <br> 
+            No Modo Diário, apresentamos uma nova atividade todos os dias. <br> 
+            Todos os dias, a partir das <strong>00:00</strong> no Horário de Brasília, você terá a oportunidade de se envolver com um desafio diferente.
+            O item em foco será trocado de maneira automática e precisa a cada <strong>24 horas</strong>. <br> Esse processo ocorre pontualmente à meia-noite, permitindo uma transição entre as atividades diárias. <br>
+            Você verá um contador regressivo que marca o tempo até a próxima atualização. Isso torna mais fácil acompanhar e se preparar para a mudança.
+            <img src="../img/howtoplay/counter.webp" alt="" style="display: block; margin-top: 0.5rem; border-radius: 10px;">
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+            <i class="fa-solid fa-infinity" style="margin-right: 0.5rem;"></i> Modo "infinito"
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+        <div class="accordion-body">
+            <strong>Como funciona?</strong> <br> 
+            O Modo "Infinito" oferece uma série ininterrupta de filmes para você aproveitar. <br>
+             Com uma extensa biblioteca de mais de 500 títulos, você encontrará uma ampla seleção de filmes para explorar, desde clássicos consagrados até filmes contemporâneos. Uma gama de gêneros e histórias aguarda sua descoberta. <br>
+            Além disso, para intensificar a diversão, o "Modo Infinito" também oferece a possibilidade de salvar sua pontuação e competir com outros jogadores por meio de uma <a href="/recordes">leaderboard</a>. <br>
+            Para desfrutar dessa funcionalidade, lembre-se de realizar um <a href="/user/register">cadastro</a> em nosso site. Assim, você poderá acompanhar o seu progresso e desafiar seus amigos para uma competição.
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+            <i class="fa-solid fa-gamepad" style="margin-right: 0.5rem;"></i> Como jogar
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <strong>Número de Oportunidades de Chute: </strong><br>
+            Você começará o jogo com um total de 6 oportunidades de chute. Isso significa que você terá seis tentativas para adivinhar o filme correto.
+            <img src="../img/howtoplay/chances.webp" style="border-radius: 10px; display: block; margin-bottom: 2rem; max-width: 100%;" alt="Número de vidas">
+
+           <strong> Modo Infinito e Dicas Aleatórias:</strong> <br>
+            No modo infinito, cada jogo começa com uma dica aleatória. Essa dica pode ser relacionada ao <strong>ano, data de lançamento, duração do filme, atores, mais atores, diretor </strong>ou <strong>gênero</strong> do filme em questão.
+            <img src="../img/howtoplay/tip.webp" style="border-radius: 10px; display: block; margin-bottom: 2rem; max-width: 100%;" alt="Dica">
+
+            <strong>Processo de chute</strong> <br>
+            Caso você tenha um filme em mente, utilize a barra de pesquisa para encontrá-lo. <br>
+            Depois de inserir o nome, clique na sugestão correspondente e, em seguida, clique em "Chutar" para enviar sua resposta.
+            <img src="../img/howtoplay/search.webp" style="border-radius: 10px; display: block; margin-bottom: 1rem; max-width: 100%;" alt="Barra de pesquisa">
+
+            Caso você <strong>NÃO</strong> tenha um filme em mente, clique em "Próxima Dica" para avançar para a próxima dica. (Isso resultará em perda de uma tentativa)
+            <img src="../img/howtoplay/nextip.webp" style="border-radius: 10px; display: block; margin-bottom: 1rem; max-width: 100%;" alt="Próxima dica">
+            
+            Se você acredita que não saberá qual será o filme, você pode utilizar o botão "Próximo Filme" para recuperar suas tentativas e tentar adivinhar um novo filme. No entanto, esse recurso pode ser utilizado no máximo <strong>3</strong> vezes durante uma sessão.
+            <img src="../img/howtoplay/skip.webp" style="border-radius: 10px; display: block; margin-bottom: 2rem; max-width: 100%;" alt="Próximo filme">
+            <strong>Após o Palpite:</strong><br>
+            Se o seu palpite estiver incorreto, sua pontuação será zerada, e a resposta que você forneceu será exibida. Você terá a opção de recomeçar para tentar novamente. <br>
+
+            Se o seu palpite estiver correto, um novo filme será selecionado aleatoriamente, e todo o processo será repetido para o próximo desafio.
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%- include('partials/footer.ejs'); %>
