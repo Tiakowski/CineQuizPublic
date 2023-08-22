@@ -166,6 +166,7 @@ new Vue({
     },
     getAllDailyMovies(){
       axios.get("/api/movie/getalldailymovie").then(response => {
+        console.log(response.data)
         this.allDailyMovies = response.data
       }).catch(error => {
         console.log(error)

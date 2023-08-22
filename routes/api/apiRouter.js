@@ -49,21 +49,19 @@ router.get("/feedback/deletefeedback/:id", authorizationMiddleware ,FeedbackCont
 router.post("/role/changerole",authorizationMiddleware, UserController.changeRole)
 router.get("/role/getrole/:id",authorizationMiddleware, UserController.getRole)
 
-//Movies
 
-// router.post("/movie/edittitle", authorizationMiddleware, MovieController.editTitle)
-// router.post("/movie/editposter", authorizationMiddleware, MovieController.editPoster)
-// router.post("/movie/addmovie", authorizationMiddleware, MovieController.addMovie)
-// router.get("/movie/number", MovieController.getNumbers)
-// router.get("/movie/meta/:id", MovieController.getMeta)
-// router.get("/movie/dashboardgetmovie/:title", MovieController.getMovieDashboard)
-// router.post("/movie/attmovie",authorizationMiddleware, MovieController.attMovie)
-// router.post("/movie/daily/attmovie",authorizationMiddleware, MovieController.addDailyMovie)
-// router.get("/movie/getdailymovie", MovieController.getDailyMovie)
-// router.get("/movie/getalldailymovie",authorizationMiddleware, MovieController.getAllDailyMovies)
-// router.get("/dailymovie/deletemovie/:id", authorizationMiddleware, MovieController.deleteDailyMovie)
+router.post("/movie/edittitle", authorizationMiddleware, MovieController.editTitle)
+router.post("/movie/editposter", authorizationMiddleware, MovieController.editPoster)
+router.post("/movie/addmovie", authorizationMiddleware, MovieController.addMovie)
+router.get("/movie/number", MovieController.getNumbers)
+router.get("/movie/meta/:id", MovieController.getMeta)
+router.get("/movie/dashboardgetmovie/:title", MovieController.getMovieDashboard)
+router.post("/movie/attmovie",authorizationMiddleware, MovieController.attMovie)
+router.post("/movie/daily/attmovie",authorizationMiddleware, MovieController.addDailyMovie)
+router.get("/movie/getdailymovie", MovieController.getDailyMovie)
+router.get("/movie/getalldailymovie",authorizationMiddleware, MovieController.getAllDailyMovies)
+router.get("/dailymovie/deletemovie/:id", authorizationMiddleware, MovieController.deleteDailyMovie)
 
-//Music
 router.post("/movie/daily/addmusic",authorizationMiddleware, MusicController.addDailyMusic)
 router.get("/music/search/:singer", MusicController.searchSingers)
 router.get("/music/getalldailymusics", authorizationMiddleware, MusicController.getAllMusics)
