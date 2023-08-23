@@ -294,9 +294,10 @@ new Vue({
                         console.log(error)
                     })
 
-                axios.get("api/movies/title/" + currentMovie)
+                axios.get("/api/movies/title/" + currentMovie)
                 .then(response => {
                     this.title = response.data.title;
+                    console.log(this.title)
                     })
                 .catch(error => {
                     console.log(error)
