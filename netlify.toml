@@ -1,6 +1,17 @@
 [build]
-  command = "npm run build"  # O comando de construção do seu projeto
-  publish = "public"         # O diretório de publicação dos arquivos estáticos
+  # O diretório raiz do seu projeto, onde o arquivo netlify.toml está localizado.
+  base = "/"
+  # O diretório onde os arquivos gerados pelo comando de construção (npm start) serão criados.
+  publish = "public"
+  # O comando de construção que você deseja executar (npm start) para construir seu projeto.
+  command = "npm start"
 
 [dev]
-  command = "node index.js"  # O comando para iniciar o servidor Node.js localmente durante o desenvolvimento
+  # O comando a ser executado durante o desenvolvimento local.
+  # Isso pode ser configurado de acordo com o que você usa para desenvolvimento local.
+  command = "npm start"
+
+[context.production]
+  # Defina o diretório de publicação para implantações de produção (se for diferente).
+  # Se não for diferente, você pode deixar essa parte em branco.
+  publish = "public"
