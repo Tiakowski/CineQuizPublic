@@ -41,13 +41,18 @@ new Vue({
         axios.get('/api/movie/getdailymovie')
                 .then(response => {
                    currentMovie = response.data
-
-                   this.userPlayed()
+                   console.log(currentMovie)
+                   if(currentMovie != null){
+                    this.userPlayed()
                     if(this.playedToday){
                       this.showStartButton = false
                       this.showBlackScreen = false
                       this.win()
                     }    
+                   } else {
+                        currentMovie = null
+                   }
+                   
                 })
                 .catch(error => {
                     if (error.message !== 'A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received') {
@@ -131,18 +136,25 @@ new Vue({
 
 
         start() {
-            this.showStartButton = false
-            this.showBlackScreen = false
-            turniningGreen()
-            this.getTip()
-            this.getMeta()
-            this.isDisabledInput = false,
-            this.isDisabledInputButton = false
-            this.isDisabledNextTip = false,
-            setTimeout(() => {
-                this.showTipsButton = true
-            }, 10);
-            
+            console.log(currentMovie)
+            if(currentMovie != null){
+                this.showStartButton = false
+                this.showBlackScreen = false
+                turniningGreen()
+                this.getTip()
+                this.getMeta()
+                this.isDisabledInput = false,
+                this.isDisabledInputButton = false
+                this.isDisabledNextTip = false,
+                setTimeout(() => {
+                    this.showTipsButton = true
+                }, 10);
+            } else {
+                this.theme = "Sem música pra hoje :("
+                this.tip = '<a href="/suggestions">Sugira</a> um filme!'
+                this.showStartButton = false
+                this.showBlackScreen = false
+            }
         },
 
         openMenu(){

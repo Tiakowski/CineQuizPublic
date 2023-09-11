@@ -120,10 +120,11 @@ class MovieController{
 
     async getDailyMovie(req, res){
         const movie = await Movies.dailyMovie()
+        console.log(movie)
         if(movie){
             res.json(movie.id_movie)
         } else {
-            res.sendStatus(404)
+            res.json(null)
         }
         
     }
