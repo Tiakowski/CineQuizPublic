@@ -1,0 +1,6 @@
+[build]
+  command = "npm run build"  # O comando de construção do seu projeto
+  publish = "public"         # O diretório de publicação dos arquivos estáticos
+
+[dev]
+  command = "node index.js"  # O comando para iniciar o servidor Node.js localmente durante o desenvolvimento
