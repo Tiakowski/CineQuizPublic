@@ -191,14 +191,24 @@ class Movies {
         }   
     }
 
-    async dailyMovie() {
+    async todayDate(){
         const today = DateTime.local().setZone('America/Sao_Paulo');
         const day = today.toFormat('dd');
         const month = today.toFormat('MM');
         const year = today.toFormat('yyyy');
         const todayDate = `${year}-${month}-${day}`;
+        return todayDate
+    }
+
+    async dailyMovie() {
+        const todayDate = await this.todayDate()
         const movie = await knex.select("*").table("daily_movie").where({ date: todayDate }).first();
         return movie;
+      }
+    
+      async chooseMovie(date) {
+        const movie = await knex.select("*").table("daily_movie").where({date}).first();
+        return movie; 
       }
 
     async addDailyMovie(movie){
@@ -231,6 +241,12 @@ class Movies {
         return movies;
       }
 
+    async chooseAllDailyMovies() {
+        const todayDate = await this.todayDate();
+        const movies = await knex.select("date").from("daily_movie").orderBy("date", "desc").where('date', '<', todayDate);
+        return movies;
+      }
+    
       async deleteDailyMovie(id){
         try {
           const result = await knex('daily_movie').where({id: id}).del()

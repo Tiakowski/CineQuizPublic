@@ -182,10 +182,14 @@
     cursor: pointer;
   }
 
-  #info{
+  #info, #calendar{
     z-index: 99;
   }
   
+  #calendar{
+    
+  }
+
   .start{
     position: absolute;
     top: 40%;

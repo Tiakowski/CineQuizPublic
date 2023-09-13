@@ -1,0 +1,50 @@
+.choose-container {
+    width: 60vw;
+    height: 80vh;
+    padding-top: 1rem;
+    background-image: url("https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c1052c79393001.5cc188e733aac.png");
+    background-size: cover; /* Ajusta o tamanho da imagem para cobrir todo o fundo */
+    background-repeat: no-repeat; /* Impede a repetição da imagem */
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    gap: 20px;
+    /* Ajusta a largura máxima para evitar que os itens fiquem muito espaçados */
+    max-width: 80%;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+    align-content: flex-start; /* Alinha os itens no início do contêiner */
+    justify-content: center;
+    
+}
+
+.square{
+    display: flex;
+    width: 3.5rem;
+    min-width: 3.5rem;
+    height: 3.5rem;
+    min-height: 3.5rem;
+    background-color: aliceblue;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.choose-container a {
+    text-decoration:wavy;
+    font-family: 'VT323', monospace;
+    color: black;
+    
+    
+}
+
+
+
+
+
+
+

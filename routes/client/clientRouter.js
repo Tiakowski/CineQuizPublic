@@ -22,9 +22,10 @@ router.get("/suggestions", HomeController.suggestion)
 router.get("/dashboard", authorizationMiddleware, HomeController.dashboard)
 router.get("/moviescontrol", authorizationMiddleware, HomeController.moviesControl)
 router.get("/daily/music", HomeController.dailyMusic)
-router.get("/daily/movie", HomeController.dailyMovie)
+router.get("/daily/movie/:date?", HomeController.dailyMovie)
 router.get("/dailycontrol",authorizationMiddleware, HomeController.dailyControl)
 router.get("/howtoplay", HomeController.howToPlay)
+router.get("/movies/choose", HomeController.chooseMovie)
 
 
 

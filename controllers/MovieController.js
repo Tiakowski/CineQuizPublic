@@ -129,10 +129,29 @@ class MovieController{
         
     }
 
+    async chooseMovie(req, res){
+        const date = req.params.date;
+        const movie = await Movies.chooseMovie(date)
+        console.log(movie)
+        if(movie){
+            res.json(movie.id_movie)
+        } else {
+            res.json(null)
+        }
+        
+    }
+
+    async chooseAllDailyMovies(req, res){
+        const movies = await Movies.chooseAllDailyMovies()
+        res.json(movies)
+    }
+
     async getAllDailyMovies(req, res){
         const movies = await Movies.getAllDailyMovies()
         res.json(movies)
     }
+
+    
 
     async deleteDailyMovie(req, res){
         const id = req.params.id
@@ -141,7 +160,6 @@ class MovieController{
         res.sendStatus(result.statusCode)
     }
 
-    
     
 
     

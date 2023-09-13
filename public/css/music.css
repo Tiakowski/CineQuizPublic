@@ -182,7 +182,7 @@
     cursor: pointer;
   }
 
-  #info{
+  #info, #calendar{
     z-index: 99;
   }
   

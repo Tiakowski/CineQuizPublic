@@ -37,8 +37,31 @@ new Vue({
         isDisabledInputButton: true,
         timeout: null
     },
-    mounted(){
-        axios.get('/api/movie/getdailymovie')
+    mounted(){  
+
+        // Obtém a parte de consulta da URL (incluindo query parameters)
+        const queryString = window.location.search; 
+
+        // Analisa a parte de consulta para obter os query parameters como um objeto
+        const params = new URLSearchParams(queryString);
+
+        // Analisa a parte de consulta para obter os query parameters como um objeto
+        if (params.has('date')) {
+            const date = params.get('date');
+            console.log('Valor do parâmetro "date":', date);
+
+            axios.get('/api/movie/choosedmovie/'+date)
+                .then(response=> {
+                    currentMovie = response.data
+                   console.log(currentMovie)
+                   
+                   
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        } else {
+            axios.get('/api/movie/getdailymovie')
                 .then(response => {
                    currentMovie = response.data
                    console.log(currentMovie)
@@ -59,6 +82,9 @@ new Vue({
                         console.log(error)
                     }
                 });
+        }
+
+        
        
             
     },
@@ -150,7 +176,7 @@ new Vue({
                     this.showTipsButton = true
                 }, 10);
             } else {
-                this.theme = "Sem música pra hoje :("
+                this.theme = "Sem filme pra hoje :("
                 this.tip = '<a href="/suggestions">Sugira</a> um filme!'
                 this.showStartButton = false
                 this.showBlackScreen = false

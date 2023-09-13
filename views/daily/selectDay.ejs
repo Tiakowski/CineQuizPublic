@@ -1,0 +1,25 @@
+<%- include('../partials/header.ejs'); %>
+<body>
+<%- include('../partials/navbar.ejs'); %> 
+<%- include('../partials/recruiter.ejs'); %>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/choose.css">
+
+<div class="choose-container">
+    <% var number = 1; %>
+    <% movies.forEach(function(movie) { %>
+        <a href="/daily/movie?date=<%= movie.date %>">
+            <div class="square">
+                <h1><%= number %></h1>
+            </div>
+        </a>
+        <% number++ %>
+    <% }); %>
+</div>
+
+
+</body>
+<%- include('../partials/footer.ejs'); %>

@@ -1,6 +1,7 @@
 var User = require("../models/User");
 var Follow = require("../models/Follow");
-const Movies = require("../models/Movies")
+const Movies = require("../models/Movies");
+
 
 
 
@@ -78,24 +79,37 @@ class HomeController{
         res.render("daily/music", {user, isAuthenticated: res.locals.isAuthenticated })
     }
 
-    async dailyMovie(req, res){
-        var userId = req.userId;
-        if(userId){
-            var user = await User.findById(req.userId);
+    async dailyMovie(req, res) {
+        const date = req.query.date;
+        console.log(date)
+        const userId = req.userId;
+        let user = null;
+    
+        if (userId) {
+            user = await User.findById(req.userId);
             if (user) {
                 delete user.password;
                 delete user.username_uppercase;
-                delete user.email;  
-            }  
-        } else {
-            var user = null
+                delete user.email;
+            }
         }
-
-        res.render("daily/movie", {user, isAuthenticated: res.locals.isAuthenticated })
+    
+        if (!date) {
+            res.render("daily/movie", { user, isAuthenticated: res.locals.isAuthenticated });
+        } else {
+            res.render("daily/movie", { user, isAuthenticated: res.locals.isAuthenticated, date });
+        }
     }
+    
 
     async dailyControl(req, res){
         res.render("dailyControl")
+    }
+
+    async chooseMovie(req, res){
+        const movies = await Movies.chooseAllDailyMovies()
+        console.log(movies)
+        res.render("daily/selectDay", {movies})
     }
 
 
@@ -124,6 +138,9 @@ class HomeController{
         delete user.username_uppercase;
         res.render("profile/myprofile", {user, numberFollowers, numberFollowing});
     }
+
+
+    
 
     async profile(req, res){
         const userId = req.userId;  //UserID -> Usuario que está logado
